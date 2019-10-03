@@ -10,10 +10,19 @@ jobs:
     #- script: npx nx format:check --base=origin/master~2
     - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js)"
       name: setCommands
+    - script: echo $(setCommands.COMMANDS)
+      name: echoCommands
 
   - job: lint1
     dependsOn: initial_setup
-    condition: succeeded()
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"lint1":[]'
+        ))
+      )
     pool:
       vmImage: 'ubuntu-latest'
     variables:
@@ -24,7 +33,14 @@ jobs:
 
   - job: lint2
     dependsOn: initial_setup
-    condition: succeeded()
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"lint2":[]'
+        ))
+      )    
     pool:
       vmImage: 'ubuntu-latest'
     variables:
@@ -35,7 +51,14 @@ jobs:
 
   - job: test1
     dependsOn: initial_setup
-    condition: succeeded()
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"test1":[]'
+        ))
+      )    
     pool:
       vmImage: 'ubuntu-latest'
     variables:
@@ -46,7 +69,14 @@ jobs:
 
   - job: test2
     dependsOn: initial_setup
-    condition: succeeded()
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"test2":[]'
+        ))
+      )        
     pool:
       vmImage: 'ubuntu-latest'
     variables:

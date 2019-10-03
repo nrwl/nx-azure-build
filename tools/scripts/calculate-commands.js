@@ -5,11 +5,11 @@ const readFileSync = require('fs').readFileSync;
 // This section isn't required in Nx 8.7.
 // You simply need to invoke affected with --executor=json-output
 const affectedProjects = [
-  ...execSync(`npx nx affected:apps --base=origin/master --plain`)
+  ...execSync(`npx nx affected:apps --base=origin/master~1 --plain`)
     .toString()
     .trim()
     .split(' '),
-  ...execSync(`npx nx affected:libs --base=origin/master --plain`)
+  ...execSync(`npx nx affected:libs --base=origin/master~1 --plain`)
     .toString()
     .trim()
     .split(' ')
