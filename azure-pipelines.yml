@@ -1,8 +1,3 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 
@@ -11,22 +6,105 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - template: .azure-pipelines/steps/install-nodejs.yml
-    - template: .azure-pipelines/steps/install-dependencies-from-cache.yml
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    #- script: npx nx format:check --base=origin/master~2
     - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js)"
       name: setCommands
-    - script: echo $(setCommands.COMMANDS)
-      name: echovar
 
   - job: lint1
     dependsOn: initial_setup
+    condition: succeeded()
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.init_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-    - template: .azure-pipelines/steps/install-nodejs.yml
-    - template: .azure-pipelines/steps/install-dependencies-from-cache.yml
-    - script: node ./tools/scripts/run-commands.js lint1 $(COMMANDS)
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: node ./tools/scripts/run-commands.js '$(COMMANDS)' lint1 lint
+
+  - job: lint2
+    dependsOn: initial_setup
+    condition: succeeded()
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: node ./tools/scripts/run-commands.js '$(COMMANDS)' lint2 lint
+
+  - job: test1
+    dependsOn: initial_setup
+    condition: succeeded()
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: node ./tools/scripts/run-commands.js '$(COMMANDS)' test1 test
+
+  - job: test2
+    dependsOn: initial_setup
+    condition: succeeded()
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: node ./tools/scripts/run-commands.js '$(COMMANDS)' test2 test
+  
+  - job: build_app1
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '--build-app1'
+        )
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: npx nx build app1 --prod
+
+  - job: build_app2
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '--build-app2'
+        )
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: npx nx build app2 --prod
+
+
+  - job: build_api
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '--build-api'
+        )
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: .azure-pipelines/steps/install-node-modules.yml
+    - script: npx nx build api --prod
+
+
+
 
 

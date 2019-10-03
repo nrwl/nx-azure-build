@@ -19,6 +19,12 @@
     },
     "api-interfaces": {
       "tags": []
+    },
+    "app2-e2e": {
+      "tags": []
+    },
+    "app2": {
+      "tags": []
     }
   }
 }
