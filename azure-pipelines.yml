@@ -13,7 +13,7 @@ jobs:
     steps:
     - template: .azure-pipelines/steps/install-nodejs.yml
     - template: .azure-pipelines/steps/install-dependencies-from-cache.yml
-    - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calcualte-commands.js)"
+    - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js)"
       name: setCommands
     - script: echo $(setCommands.COMMANDS)
       name: echovar
