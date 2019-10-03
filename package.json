@@ -22,7 +22,7 @@
     "format:check": "nx format:check",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help global change"
   },
   "private": true,
   "dependencies": {

@@ -1,15 +1,18 @@
 const execSync = require('child_process').execSync;
 const readFileSync = require('fs').readFileSync;
 
+const isMaster = process.argv[2] === 'master';
+const baseSha = isMaster ? 'origin/master~1' : 'origin/master';
+
 // -----
 // This section isn't required in Nx 8.7.
 // You simply need to invoke affected with --executor=json-output
 const affectedProjects = [
-  ...execSync(`npx nx affected:apps --base=origin/master~1 --plain`)
+  ...execSync(`npx nx affected:apps --base=${baseSha} --plain`)
     .toString()
     .trim()
     .split(' '),
-  ...execSync(`npx nx affected:libs --base=origin/master~1 --plain`)
+  ...execSync(`npx nx affected:libs --base=${baseSha} --plain`)
     .toString()
     .trim()
     .split(' ')

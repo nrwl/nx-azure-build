@@ -7,8 +7,17 @@ jobs:
       vmImage: 'ubuntu-latest'
     steps:
     - template: .azure-pipelines/steps/install-node-modules.yml
-    #- script: npx nx format:check --base=origin/master~2
-    - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js)"
+
+    - script: npx nx format:check --base=origin/master~1
+      condition: not(eq(variables['Build.Reason'], 'PullRequest'))
+    - script: npx nx format:check --base=origin/master
+      condition: eq(variables['Build.Reason'], 'PullRequest')      
+    
+    - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js master)"
+      condition: not(eq(variables['Build.Reason'], 'PullRequest'))
+      name: setCommandsMaster
+    - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js pr)"
+      condition: eq(variables['Build.Reason'], 'PullRequest')
       name: setCommands
     - script: echo $(setCommands.COMMANDS)
       name: echoCommands
