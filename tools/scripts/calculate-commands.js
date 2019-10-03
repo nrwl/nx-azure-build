@@ -1,11 +1,11 @@
 const execSync = require('child_process').execSync;
 
 const affectedProjects = [
-  execSync(`npx nx affected:apps --base=origin/master~2 --plain`)
-    .toString()
+  execSync(`npx nx affected:apps --all --plain`)
+    .toString().trim()
     .split(' '),
-  execSync(`npx nx affected:libs --base=origin/master~2 --plain`)
-    .toString()
+  execSync(`npx nx affected:libs --all --plain`)
+    .toString().trim()
     .split(' ')
 ];
 
