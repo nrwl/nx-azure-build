@@ -13,4 +13,4 @@ const commands = {
   lint2: lint2.map(s => `nx lint ${s}`)
 };
 
-console.log(JSON.stringify(commands, null, 2));
+console.log(JSON.stringify(commands));
