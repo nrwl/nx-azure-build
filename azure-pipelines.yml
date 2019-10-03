@@ -11,9 +11,20 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '10.x'
+    - template: .azure-pipelines/steps/install-nodejs.yml
     - template: .azure-pipelines/steps/install-dependencies-from-cache.yml
+    - script: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calcualte-commands.js)"
+      name: setCommands
+
+  - job: lint1
+    dependsOn: initial_setup
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.init_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+    - template: .azure-pipelines/steps/install-nodejs.yml
+    - template: .azure-pipelines/steps/install-dependencies-from-cache.yml
+    - script: node ./tools/scripts/run-commands.js lint1 ${COMMANDS}
 
 
