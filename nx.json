@@ -1,0 +1,117 @@
+{
+  "npmScope": "happyorg",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "react-app": {
+      "tags": []
+    },
+    "react-app-e2e": {
+      "tags": []
+    },
+    "ng-app-e2e": {
+      "tags": []
+    },
+    "ng-app": {
+      "tags": []
+    },
+    "shared-utils": {
+      "tags": []
+    },
+    "ng-lib0": {
+      "tags": []
+    },
+    "ng-lib1": {
+      "tags": []
+    },
+    "ng-lib2": {
+      "tags": []
+    },
+    "ng-lib3": {
+      "tags": []
+    },
+    "ng-lib4": {
+      "tags": []
+    },
+    "ng-lib5": {
+      "tags": []
+    },
+    "ng-lib6": {
+      "tags": []
+    },
+    "ng-lib7": {
+      "tags": []
+    },
+    "ng-lib8": {
+      "tags": []
+    },
+    "ng-lib9": {
+      "tags": []
+    },
+    "ng-lib10": {
+      "tags": []
+    },
+    "ng-lib11": {
+      "tags": []
+    },
+    "ng-lib12": {
+      "tags": []
+    },
+    "ng-lib13": {
+      "tags": []
+    },
+    "ng-lib14": {
+      "tags": []
+    },
+    "react-lib0": {
+      "tags": []
+    },
+    "react-lib1": {
+      "tags": []
+    },
+    "react-lib2": {
+      "tags": []
+    },
+    "react-lib3": {
+      "tags": []
+    },
+    "react-lib4": {
+      "tags": []
+    },
+    "react-lib5": {
+      "tags": []
+    },
+    "react-lib6": {
+      "tags": []
+    },
+    "react-lib7": {
+      "tags": []
+    },
+    "react-lib8": {
+      "tags": []
+    },
+    "react-lib9": {
+      "tags": []
+    },
+    "react-lib10": {
+      "tags": []
+    },
+    "react-lib11": {
+      "tags": []
+    },
+    "react-lib12": {
+      "tags": []
+    },
+    "react-lib13": {
+      "tags": []
+    },
+    "react-lib14": {
+      "tags": []
+    }
+  }
+}

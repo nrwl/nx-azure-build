@@ -1,0 +1,177 @@
+trigger:
+  - master
+
+jobs:
+  - job: initial_setup
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      IS_PR: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js $(IS_PR))"
+        name: setCommands
+      - script: echo $(setCommands.COMMANDS)
+        name: echoCommands
+
+  - job: lint1
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"lint1":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint1 lint
+
+  - job: lint2
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"lint2":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint2 lint
+
+  - job: lint3
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"lint2":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint3 lint
+
+  - job: test1
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"test1":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test1 test
+
+  - job: test2
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"test2":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test2 test
+
+  - job: test3
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"test3":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test3 test
+
+  - job: build1
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"build1":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build1 build`
+
+  - job: build2
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"build2":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build2 build
+
+  - job: build3
+    dependsOn: initial_setup
+    condition: |
+      and(
+        succeeded(),
+        not(contains(
+          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
+          '"build3":[]'
+        ))
+      )
+    pool:
+      vmImage: 'ubuntu-latest'
+    variables:
+      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+    steps:
+      - template: .azure-pipelines/steps/install-node-modules.yml
+      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build3 build
