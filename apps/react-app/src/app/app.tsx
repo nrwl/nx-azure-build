@@ -18,6 +18,7 @@ import { ReactLib14 } from '@happyorg/react/lib14';
 export const App = () => {
   return (
     <div>
+      <h1>Welcome to react-app!</h1>
       <ReactLib0></ReactLib0>
       <ReactLib1></ReactLib1>
       <ReactLib2></ReactLib2>

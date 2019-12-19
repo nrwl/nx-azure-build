@@ -1,0 +1,71 @@
+stages:
+  - prepare
+  - test
+  - build
+
+variables:
+  GIT_DEPTH: 0
+
+default:
+  image: node:13
+  cache: &global_cache
+    key:
+      prefix: ${CI_PROJECT_PATH_SLUG}
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
+    policy: pull
+initial_setup:
+  stage: prepare
+  cache:
+    <<: *global_cache
+    policy: pull-push
+  before_script:
+    - yarn install --ignore-engines --frozen-lockfile
+  script:
+    - node ./tools/scripts/calculate-commands.js $IS_PR > COMMANDS.txt
+    - echo $(cat COMMANDS.txt)
+  variables:
+    PREFIX: 'remotes/'
+    IS_PR: $CI_PIPELINE_SOURCE == "merge_request_event"
+  artifacts:
+    paths:
+      - COMMANDS.txt
+lint:
+  stage: test
+  parallel: 3
+  before_script:
+    - export COMMANDS=$(cat COMMANDS.txt)
+    - yarn install --ignore-engines --frozen-lockfile
+  script:
+    - node ./tools/scripts/run-many.js "$COMMANDS" lint$CI_NODE_INDEX lint
+
+test:
+  stage: test
+  parallel: 3
+  before_script:
+    - export COMMANDS=$(cat COMMANDS.txt)
+    - yarn install --ignore-engines --frozen-lockfile
+  script:
+    - node ./tools/scripts/run-many.js "$COMMANDS" test$CI_NODE_INDEX test
+
+e2e:
+  image: cypress/base:13.3.0
+  stage: test
+  parallel: 3
+  before_script:
+    - export COMMANDS=$(cat COMMANDS.txt)
+    - yarn install --ignore-engines --frozen-lockfile
+    - yarn cypress install
+  script:
+    - node ./tools/scripts/run-many.js "$COMMANDS" e2e$CI_NODE_INDEX e2e
+
+build:
+  stage: test
+  parallel: 3
+  before_script:
+    - export COMMANDS=$(cat COMMANDS.txt)
+    - yarn install --ignore-engines --frozen-lockfile
+  script:
+    - node ./tools/scripts/run-many.js "$COMMANDS" build$CI_NODE_INDEX build
