@@ -1,10 +1,17 @@
 const execSync = require('child_process').execSync;
 const isMaster = process.argv[2] === 'False';
-const baseSha = isMaster ? 'origin/master~1' : 'origin/master';
+
+// needed by Gitlab CI
+const remotePrefix = process.env.PREFIX || '';
+
+const baseSha = isMaster
+  ? `${remotePrefix}origin/master~1`
+  : `${remotePrefix}origin/master`;
 
 console.log(
   JSON.stringify({
     ...commands('lint'),
+    ...commands('e2e'),
     ...commands('test'),
     ...commands('build')
   })
