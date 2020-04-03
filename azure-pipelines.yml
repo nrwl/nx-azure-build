@@ -16,7 +16,7 @@ jobs:
       IS_PR: $[eq(variables['Build.Reason'], 'PullRequest')]
       CACHE_RESTORED: false
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - pwsh: Write-Output "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js $(IS_PR))"
         name: setCommands
         displayName: Set commands
