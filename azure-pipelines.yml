@@ -1,18 +1,28 @@
 trigger:
   - master
 
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  Pipeline.Cache: $(Pipeline.Workspace)/.yarn
+
 jobs:
   - job: initial_setup
+    displayName: Get affected and allocate commands.
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      IS_PR: $[ eq(variables['Build.Reason'], 'PullRequest') ]
+      IS_PR: $[eq(variables['Build.Reason'], 'PullRequest')]
+      CACHE_RESTORED: false
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js $(IS_PR))"
+      - template: .azure-pipelines/install-node-modules.yml
+      - pwsh: Write-Output "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js $(IS_PR))"
         name: setCommands
-      - script: echo $(setCommands.COMMANDS)
+        displayName: Set commands
+      - pwsh: Write-Output "$(setCommands.COMMANDS)"
         name: echoCommands
+        displayName: Echo commands
 
   - job: lint1
     dependsOn: initial_setup
@@ -27,10 +37,11 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint1 lint
+      - template: .azure-pipelines/install-node-modules.yml
+      - pwsh: node ./tools/scripts/run-many.js '$(COMMANDS)' lint1 lint
+        displayName: Lint affected
 
   - job: lint2
     dependsOn: initial_setup
@@ -45,10 +56,11 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint2 lint
+      - template: .azure-pipelines/install-node-modules.yml
+      - pwsh: node ./tools/scripts/run-many.js '$(COMMANDS)' lint2 lint
+        displayName: Lint affected
 
   - job: lint3
     dependsOn: initial_setup
@@ -63,10 +75,11 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint3 lint
+        displayName: Lint affected
 
   - job: test1
     dependsOn: initial_setup
@@ -81,10 +94,11 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test1 test
+        displayName: Test affected
 
   - job: test2
     dependsOn: initial_setup
@@ -99,10 +113,11 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test2 test
+        displayName: Test affected
 
   - job: test3
     dependsOn: initial_setup
@@ -117,10 +132,11 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
+      COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test3 test
+        displayName: Test affected
 
   - job: build1
     dependsOn: initial_setup
@@ -137,8 +153,9 @@ jobs:
     variables:
       COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build1 build`
+        displayName: Build affected
 
   - job: build2
     dependsOn: initial_setup
@@ -155,8 +172,9 @@ jobs:
     variables:
       COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build2 build
+        displayName: Build affected
 
   - job: build3
     dependsOn: initial_setup
@@ -173,5 +191,6 @@ jobs:
     variables:
       COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
+      - template: .azure-pipelines/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build3 build
+        displayName: Build affected

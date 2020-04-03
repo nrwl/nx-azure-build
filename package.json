@@ -23,7 +23,8 @@
     "format:check": "nx format:check",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "postinstall": "node ./tools/scripts/ngcc-unless-cached.js"
   },
   "private": true,
   "dependencies": {
