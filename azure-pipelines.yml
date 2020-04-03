@@ -39,7 +39,7 @@ jobs:
     variables:
       COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - pwsh: node ./tools/scripts/run-many.js '$(COMMANDS)' lint1 lint
         displayName: Lint affected
 
@@ -58,7 +58,7 @@ jobs:
     variables:
       COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - pwsh: node ./tools/scripts/run-many.js '$(COMMANDS)' lint2 lint
         displayName: Lint affected
 
@@ -77,7 +77,7 @@ jobs:
     variables:
       COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint3 lint
         displayName: Lint affected
 
@@ -96,7 +96,7 @@ jobs:
     variables:
       COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test1 test
         displayName: Test affected
 
@@ -115,7 +115,7 @@ jobs:
     variables:
       COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test2 test
         displayName: Test affected
 
@@ -134,7 +134,7 @@ jobs:
     variables:
       COMMANDS: $[dependencies.initial_setup.outputs['setCommands.COMMANDS']]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test3 test
         displayName: Test affected
 
@@ -153,7 +153,7 @@ jobs:
     variables:
       COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build1 build`
         displayName: Build affected
 
@@ -172,7 +172,7 @@ jobs:
     variables:
       COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build2 build
         displayName: Build affected
 
@@ -191,6 +191,6 @@ jobs:
     variables:
       COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
     steps:
-      - template: .azure-pipelines/install-node-modules.yml
+      - template: .azure-pipelines/steps/install-node-modules.yml
       - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build3 build
         displayName: Build affected
