@@ -277,7 +277,7 @@ This example uses a fixed agent graph. This setup works without any problems for
 
 ## Summary
 
-1. Rebuilding/retesting/relinting everyting on every code change doesn't scale. **In this example it takes 45 minutes.**
+1. Rebuilding/retesting/relinting everything on every code change doesn't scale. **In this example it takes 45 minutes.**
 2. Nx lets you rebuild only what is affected, which drastically improves the average CI time, but it doesn't address the worst-case scenario.
 3. Nx helps you run multiple targets in parallel on the same machine.
 4. Nx provides `print-affected` and `run-many` which make implemented distributed CI simple. **In this example the time went down from 45 minutes to only 7**
