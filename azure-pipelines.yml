@@ -57,7 +57,7 @@ jobs:
         succeeded(),
         not(contains(
           dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"lint2":[]'
+          '"lint3":[]'
         ))
       )
     pool:
