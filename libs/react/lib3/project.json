@@ -1,0 +1,31 @@
+{
+  "name": "react-lib3",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib3/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib3/**/*.ts",
+          "libs/react/lib3/**/*.tsx",
+          "libs/react/lib3/**/*.spec.ts",
+          "libs/react/lib3/**/*.spec.tsx",
+          "libs/react/lib3/**/*.spec.js",
+          "libs/react/lib3/**/*.spec.jsx",
+          "libs/react/lib3/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib3/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib3"]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "react-lib13",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib13/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib13/**/*.ts",
+          "libs/react/lib13/**/*.tsx",
+          "libs/react/lib13/**/*.spec.ts",
+          "libs/react/lib13/**/*.spec.tsx",
+          "libs/react/lib13/**/*.spec.js",
+          "libs/react/lib13/**/*.spec.jsx",
+          "libs/react/lib13/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib13/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib13"]
+    }
+  }
+}

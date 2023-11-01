@@ -1,0 +1,96 @@
+{
+  "name": "react-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-app/src",
+  "projectType": "application",
+  "generators": {},
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "options": {
+        "outputPath": "dist/apps/react-app",
+        "index": "apps/react-app/src/index.html",
+        "main": "apps/react-app/src/main.tsx",
+        "polyfills": "apps/react-app/src/polyfills.ts",
+        "tsConfig": "apps/react-app/tsconfig.app.json",
+        "assets": [
+          "apps/react-app/src/favicon.ico",
+          "apps/react-app/src/assets"
+        ],
+        "styles": ["apps/react-app/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nx/react/plugins/babel",
+        "buildLibsFromSource": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/react-app/src/environments/environment.ts",
+              "with": "apps/react-app/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
+        },
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        }
+      },
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "options": {
+        "buildTarget": "react-app:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "react-app:build:production"
+        },
+        "development": {
+          "buildTarget": "react-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/react-app/**/*.ts",
+          "apps/react-app/**/*.tsx",
+          "apps/react-app/**/*.spec.ts",
+          "apps/react-app/**/*.spec.tsx",
+          "apps/react-app/**/*.spec.js",
+          "apps/react-app/**/*.spec.jsx",
+          "apps/react-app/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/react-app/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/apps/react-app"]
+    }
+  }
+}

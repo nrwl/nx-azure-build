@@ -1,0 +1,31 @@
+{
+  "name": "react-lib0",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib0/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib0/**/*.ts",
+          "libs/react/lib0/**/*.tsx",
+          "libs/react/lib0/**/*.spec.ts",
+          "libs/react/lib0/**/*.spec.tsx",
+          "libs/react/lib0/**/*.spec.js",
+          "libs/react/lib0/**/*.spec.jsx",
+          "libs/react/lib0/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib0/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib0"]
+    }
+  }
+}

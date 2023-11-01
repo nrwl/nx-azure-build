@@ -1,0 +1,31 @@
+{
+  "name": "react-lib4",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib4/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib4/**/*.ts",
+          "libs/react/lib4/**/*.tsx",
+          "libs/react/lib4/**/*.spec.ts",
+          "libs/react/lib4/**/*.spec.tsx",
+          "libs/react/lib4/**/*.spec.js",
+          "libs/react/lib4/**/*.spec.jsx",
+          "libs/react/lib4/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib4/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib4"]
+    }
+  }
+}

@@ -11,10 +11,10 @@ function generateAngularLibs() {
     libNames.push(`lib${i}`);
   }
 
-  libNames.forEach(libName => generateAngularLib(libName));
+  libNames.forEach((libName) => generateAngularLib(libName));
 
   const selectors = libNames
-    .map(c => `<happyorg-${c}-main></happyorg-${c}-main>`)
+    .map((c) => `<happyorg-${c}-main></happyorg-${c}-main>`)
     .join('\n');
   fs.writeFileSync(
     `apps/ng-app/src/app/app.component.html`,
@@ -27,13 +27,13 @@ function generateAngularLibs() {
 
   const imports = libNames
     .map(
-      libName =>
+      (libName) =>
         `import { ${moduleName(libName)} } from '@happyorg/ng/${libName}';`
     )
     .join('\n');
 
   const moduleImports = libNames
-    .map(childLibName => moduleName(childLibName))
+    .map((childLibName) => moduleName(childLibName))
     .join(', ');
 
   fs.writeFileSync(
@@ -67,7 +67,7 @@ export class AppModule {}
       componentNames.push(`${libName}-component${i}`);
     }
 
-    componentNames.forEach(componentName => {
+    componentNames.forEach((componentName) => {
       cp.execSync(
         `nx g @nrwl/angular:component ${componentName}  --project=ng-${libName}`
       );
@@ -138,7 +138,7 @@ export class AppModule {}
     );
 
     const selectors = componentNames
-      .map(c => `<happyorg-${c}></happyorg-${c}>`)
+      .map((c) => `<happyorg-${c}></happyorg-${c}>`)
       .join('\n');
 
     fs.writeFileSync(
@@ -193,13 +193,13 @@ function generateReactLibs() {
     libNames.push(`lib${i}`);
   }
 
-  libNames.forEach(libName => generateReactLib(libName));
+  libNames.forEach((libName) => generateReactLib(libName));
 
   const imports = libNames
-    .map(l => `import { React${capitalize(l)} } from "@happyorg/react/${l}";`)
+    .map((l) => `import { React${capitalize(l)} } from "@happyorg/react/${l}";`)
     .join('\n');
   const instantiations = libNames
-    .map(l => `<React${capitalize(l)}></React${capitalize(l)}>`)
+    .map((l) => `<React${capitalize(l)}></React${capitalize(l)}>`)
     .join('\n');
 
   fs.writeFileSync(
@@ -217,7 +217,7 @@ export default App;`
   );
 
   function generateReactLib(libName) {
-    cp.execSync(`nx g @nrwl/react:lib ${libName} --directory=react`);
+    cp.execSync(`nx g @nx/react:lib ${libName} --directory=react`);
 
     const componentNames = [];
 
@@ -225,9 +225,9 @@ export default App;`
       componentNames.push(`${libName}-component${i}`);
     }
 
-    componentNames.forEach(componentName => {
+    componentNames.forEach((componentName) => {
       cp.execSync(
-        `nx g @nrwl/react:component ${componentName}  --project=react-${libName}`
+        `nx g @nx/react:component ${componentName}  --project=react-${libName}`
       );
 
       const componentClass = componentClassName(componentName);
@@ -268,13 +268,13 @@ export default App;`
 
     const l = libName.charAt(0).toUpperCase() + libName.slice(1);
     const componentImports = componentNames
-      .map(c => {
+      .map((c) => {
         const cc = componentClassName(c);
         return `import {${cc}} from './${c}';`;
       })
       .join('\n');
     const componentInstantiations = componentNames
-      .map(c => {
+      .map((c) => {
         const cc = componentClassName(c);
         return `<${cc}></${cc}>`;
       })
