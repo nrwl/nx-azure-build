@@ -1,10 +1,10 @@
 module.exports = {
-  preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-  coverageDirectory: '../../../coverage/libs/react/lib1',
+  coverageDirectory: '../../coverage/libs/shared-utils',
   globals: { 'ts-jest': { tsConfig: '<rootDir>/tsconfig.spec.json' } },
-  displayName: 'react-lib1',
+  displayName: 'shared-utils',
+  preset: '../../jest.preset.ts',
 };
