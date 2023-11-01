@@ -1,7 +1,7 @@
 trigger:
-  - main
+  - master
 pr:
-  - main
+  - master
 
 variables:
   CI: 'true'
