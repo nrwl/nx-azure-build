@@ -1,177 +1,41 @@
 trigger:
-  - master
+  - main
+pr:
+  - main
+
+variables:
+  CI: 'true'
+  ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+    NX_BRANCH: $(System.PullRequest.PullRequestId) # You can use $(System.PullRequest.PullRequestNumber if your pipeline is triggered by a PR from GitHub ONLY)
+    TARGET_BRANCH: $[replace(variables['System.PullRequest.TargetBranch'],'refs/heads/','origin/')]
+  ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+    NX_BRANCH: $(Build.SourceBranchName)
+  HEAD_SHA: $(git rev-parse HEAD)
 
 jobs:
-  - job: initial_setup
+  - job: main
     pool:
       vmImage: 'ubuntu-latest'
-    variables:
-      IS_PR: $[ eq(variables['Build.Reason'], 'PullRequest') ]
     steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - powershell: echo "##vso[task.setvariable variable=COMMANDS;isOutput=true]$(node ./tools/scripts/calculate-commands.js $(IS_PR))"
-        name: setCommands
-      - script: echo $(setCommands.COMMANDS)
-        name: echoCommands
+      # Set Azure Devops CLI default settings
+      - bash: az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject)
+        displayName: 'Set default Azure DevOps organization and project'
 
-  - job: lint1
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"lint1":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint1 lint
+      # Get last successfull commit from Azure Devops CLI
+      - bash: |
+          LAST_SHA=$(az pipelines build list --branch $(Build.SourceBranchName) --definition-ids $(System.DefinitionId) --result succeeded --top 1 --query "[0].triggerInfo.\"ci.sourceSha\"")
+          if [ -z "$LAST_SHA" ]
+          then
+            LAST_SHA=$DEFAULT_BASE_SHA
+          fi
+          echo "Last successful commit SHA: $LAST_SHA"
+          echo "##vso[task.setvariable variable=BASE_SHA]$LAST_SHA"
+        displayName: 'Get last successful commit SHA'
+        env:
+          AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
 
-  - job: lint2
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"lint2":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint2 lint
+      - script: yarn
 
-  - job: lint3
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"lint2":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' lint3 lint
+      - script: npx nx format:check --base=$(BASE_SHA)
 
-  - job: test1
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"test1":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test1 test
-
-  - job: test2
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"test2":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test2 test
-
-  - job: test3
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"test3":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' test3 test
-
-  - job: build1
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"build1":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build1 build`
-
-  - job: build2
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"build2":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build2 build
-
-  - job: build3
-    dependsOn: initial_setup
-    condition: |
-      and(
-        succeeded(),
-        not(contains(
-          dependencies.initial_setup.outputs['setCommands.COMMANDS'],
-          '"build3":[]'
-        ))
-      )
-    pool:
-      vmImage: 'ubuntu-latest'
-    variables:
-      COMMANDS: $[ dependencies.initial_setup.outputs['setCommands.COMMANDS'] ]
-    steps:
-      - template: .azure-pipelines/steps/install-node-modules.yml
-      - script: node ./tools/scripts/run-many.js '$(COMMANDS)' build3 build
+      - script: npx nx affected --base=$(BASE_SHA) -t lint,test,build --parallel=3 --configuration=ci
