@@ -1,0 +1,31 @@
+{
+  "name": "react-lib10",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib10/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib10/**/*.ts",
+          "libs/react/lib10/**/*.tsx",
+          "libs/react/lib10/**/*.spec.ts",
+          "libs/react/lib10/**/*.spec.tsx",
+          "libs/react/lib10/**/*.spec.js",
+          "libs/react/lib10/**/*.spec.jsx",
+          "libs/react/lib10/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib10/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib10"]
+    }
+  }
+}

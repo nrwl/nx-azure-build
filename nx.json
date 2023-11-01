@@ -1,12 +1,4 @@
 {
-  "npmScope": "happyorg",
-  "implicitDependencies": {
-    "workspace.json": "*",
-    "package.json": "*",
-    "tsconfig.json": "*",
-    "tslint.json": "*",
-    "nx.json": "*"
-  },
   "projects": {
     "react-app": {
       "tags": []
@@ -14,58 +6,7 @@
     "react-app-e2e": {
       "tags": []
     },
-    "ng-app-e2e": {
-      "tags": []
-    },
-    "ng-app": {
-      "tags": []
-    },
     "shared-utils": {
-      "tags": []
-    },
-    "ng-lib0": {
-      "tags": []
-    },
-    "ng-lib1": {
-      "tags": []
-    },
-    "ng-lib2": {
-      "tags": []
-    },
-    "ng-lib3": {
-      "tags": []
-    },
-    "ng-lib4": {
-      "tags": []
-    },
-    "ng-lib5": {
-      "tags": []
-    },
-    "ng-lib6": {
-      "tags": []
-    },
-    "ng-lib7": {
-      "tags": []
-    },
-    "ng-lib8": {
-      "tags": []
-    },
-    "ng-lib9": {
-      "tags": []
-    },
-    "ng-lib10": {
-      "tags": []
-    },
-    "ng-lib11": {
-      "tags": []
-    },
-    "ng-lib12": {
-      "tags": []
-    },
-    "ng-lib13": {
-      "tags": []
-    },
-    "ng-lib14": {
       "tags": []
     },
     "react-lib0": {
@@ -113,5 +54,104 @@
     "react-lib14": {
       "tags": []
     }
-  }
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "defaultProject": "react-app",
+  "generators": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nx/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nx/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nx/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [
+      "{workspaceRoot}/workspace.json",
+      "{workspaceRoot}/tslint.json",
+      "{workspaceRoot}/nx.json",
+      "{workspaceRoot}/tsconfig.base.json",
+      "{workspaceRoot}/babel.config.json"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s"
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": ["production", "^production"],
+      "cache": true
+    },
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true
+    },
+    "e2e": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    }
+  },
+  "parallel": 1,
+  "nxCloudAccessToken": "MTIzNDc3NTktY2IzNi00OWI3LTk3NzItMzI2YmZiNTJkMzc1fHJlYWQtd3JpdGU="
 }

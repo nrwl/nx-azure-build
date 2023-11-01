@@ -1,0 +1,31 @@
+{
+  "name": "react-lib11",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib11/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib11/**/*.ts",
+          "libs/react/lib11/**/*.tsx",
+          "libs/react/lib11/**/*.spec.ts",
+          "libs/react/lib11/**/*.spec.tsx",
+          "libs/react/lib11/**/*.spec.js",
+          "libs/react/lib11/**/*.spec.jsx",
+          "libs/react/lib11/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib11/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib11"]
+    }
+  }
+}

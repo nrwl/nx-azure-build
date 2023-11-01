@@ -1,0 +1,31 @@
+{
+  "name": "react-lib2",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib2/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib2/**/*.ts",
+          "libs/react/lib2/**/*.tsx",
+          "libs/react/lib2/**/*.spec.ts",
+          "libs/react/lib2/**/*.spec.tsx",
+          "libs/react/lib2/**/*.spec.js",
+          "libs/react/lib2/**/*.spec.jsx",
+          "libs/react/lib2/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib2/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib2"]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "react-lib6",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib6/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib6/**/*.ts",
+          "libs/react/lib6/**/*.tsx",
+          "libs/react/lib6/**/*.spec.ts",
+          "libs/react/lib6/**/*.spec.tsx",
+          "libs/react/lib6/**/*.spec.js",
+          "libs/react/lib6/**/*.spec.jsx",
+          "libs/react/lib6/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib6/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib6"]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "react-lib14",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib14/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib14/**/*.ts",
+          "libs/react/lib14/**/*.tsx",
+          "libs/react/lib14/**/*.spec.ts",
+          "libs/react/lib14/**/*.spec.tsx",
+          "libs/react/lib14/**/*.spec.js",
+          "libs/react/lib14/**/*.spec.jsx",
+          "libs/react/lib14/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib14/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib14"]
+    }
+  }
+}

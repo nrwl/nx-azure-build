@@ -1,0 +1,31 @@
+{
+  "name": "react-lib5",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib5/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib5/**/*.ts",
+          "libs/react/lib5/**/*.tsx",
+          "libs/react/lib5/**/*.spec.ts",
+          "libs/react/lib5/**/*.spec.tsx",
+          "libs/react/lib5/**/*.spec.js",
+          "libs/react/lib5/**/*.spec.jsx",
+          "libs/react/lib5/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib5/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib5"]
+    }
+  }
+}

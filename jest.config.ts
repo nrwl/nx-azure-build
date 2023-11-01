@@ -1,0 +1,21 @@
+export default {
+  projects: [
+    '<rootDir>/apps/react-app',
+    '<rootDir>/libs/shared-utils',
+    '<rootDir>/libs/react/lib0',
+    '<rootDir>/libs/react/lib1',
+    '<rootDir>/libs/react/lib2',
+    '<rootDir>/libs/react/lib3',
+    '<rootDir>/libs/react/lib4',
+    '<rootDir>/libs/react/lib5',
+    '<rootDir>/libs/react/lib6',
+    '<rootDir>/libs/react/lib7',
+    '<rootDir>/libs/react/lib8',
+    '<rootDir>/libs/react/lib9',
+    '<rootDir>/libs/react/lib10',
+    '<rootDir>/libs/react/lib11',
+    '<rootDir>/libs/react/lib12',
+    '<rootDir>/libs/react/lib13',
+    '<rootDir>/libs/react/lib14',
+  ],
+};

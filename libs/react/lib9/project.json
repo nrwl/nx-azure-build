@@ -1,0 +1,31 @@
+{
+  "name": "react-lib9",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib9/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib9/**/*.ts",
+          "libs/react/lib9/**/*.tsx",
+          "libs/react/lib9/**/*.spec.ts",
+          "libs/react/lib9/**/*.spec.tsx",
+          "libs/react/lib9/**/*.spec.js",
+          "libs/react/lib9/**/*.spec.jsx",
+          "libs/react/lib9/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib9/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib9"]
+    }
+  }
+}

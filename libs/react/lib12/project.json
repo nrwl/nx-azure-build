@@ -1,0 +1,31 @@
+{
+  "name": "react-lib12",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib12/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib12/**/*.ts",
+          "libs/react/lib12/**/*.tsx",
+          "libs/react/lib12/**/*.spec.ts",
+          "libs/react/lib12/**/*.spec.tsx",
+          "libs/react/lib12/**/*.spec.js",
+          "libs/react/lib12/**/*.spec.jsx",
+          "libs/react/lib12/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib12/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib12"]
+    }
+  }
+}

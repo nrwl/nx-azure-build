@@ -1,0 +1,31 @@
+{
+  "name": "react-lib8",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react/lib8/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/react/lib8/**/*.ts",
+          "libs/react/lib8/**/*.tsx",
+          "libs/react/lib8/**/*.spec.ts",
+          "libs/react/lib8/**/*.spec.tsx",
+          "libs/react/lib8/**/*.spec.js",
+          "libs/react/lib8/**/*.spec.jsx",
+          "libs/react/lib8/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "libs/react/lib8/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/libs/react/lib8"]
+    }
+  }
+}
