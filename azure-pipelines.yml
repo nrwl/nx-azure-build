@@ -36,6 +36,8 @@ jobs:
 
       - script: yarn
 
+      - script: git branch --track master origin/master
+
       - script: npx nx format:check --base=$(BASE_SHA)
 
       - script: npx nx affected --base=$(BASE_SHA) -t lint,test,build --parallel=3 --configuration=ci

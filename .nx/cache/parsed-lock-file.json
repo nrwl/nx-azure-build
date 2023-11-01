@@ -8028,24 +8028,6 @@
         "hash": "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="
       }
     },
-    "npm:react-shallow-renderer": {
-      "type": "npm",
-      "name": "npm:react-shallow-renderer",
-      "data": {
-        "version": "16.15.0",
-        "packageName": "react-shallow-renderer",
-        "hash": "sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA=="
-      }
-    },
-    "npm:react-test-renderer": {
-      "type": "npm",
-      "name": "npm:react-test-renderer",
-      "data": {
-        "version": "18.2.0",
-        "packageName": "react-test-renderer",
-        "hash": "sha512-JWD+aQ0lh2gvh4NM3bBM42Kx+XybOxCpgYK7F8ugAlpaTSnWsX+39Z4XkOykGZAHrjwwTZT3x3KxswVWxHPUqA=="
-      }
-    },
     "npm:react": {
       "type": "npm",
       "name": "npm:react",
@@ -9950,6 +9932,81 @@
     {
       "source": "npm:@babel/code-frame",
       "target": "npm:chalk@2.4.2",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@ampproject/remapping",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/code-frame",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/generator",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/helper-compilation-targets",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/helper-module-transforms",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/helpers",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/parser",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/template",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/traverse",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:@babel/types",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:convert-source-map",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:debug@4.1.1",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:gensync",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:json5",
+      "type": "static"
+    },
+    {
+      "source": "npm:@babel/core",
+      "target": "npm:semver@6.3.1",
       "type": "static"
     },
     {
@@ -22514,31 +22571,6 @@
     },
     {
       "source": "npm:react-dom",
-      "target": "npm:scheduler",
-      "type": "static"
-    },
-    {
-      "source": "npm:react-shallow-renderer",
-      "target": "npm:object-assign",
-      "type": "static"
-    },
-    {
-      "source": "npm:react-shallow-renderer",
-      "target": "npm:react-is",
-      "type": "static"
-    },
-    {
-      "source": "npm:react-test-renderer",
-      "target": "npm:react-is",
-      "type": "static"
-    },
-    {
-      "source": "npm:react-test-renderer",
-      "target": "npm:react-shallow-renderer",
-      "type": "static"
-    },
-    {
-      "source": "npm:react-test-renderer",
       "target": "npm:scheduler",
       "type": "static"
     },
