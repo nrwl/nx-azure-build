@@ -1,0 +1,15 @@
+Failed to start or connect to the Nx Daemon process.
+
+Messages from the log:
+[NX Daemon Server] - 2023-11-01T17:30:40.579Z - Started listening on: /Users/isaac/Documents/code/nx-azure-build/node_modules/.cache/nx/d/d.sock
+[NX Daemon Server] - 2023-11-01T17:30:40.586Z - [WATCHER]: Subscribed to changes within: /Users/isaac/Documents/code/nx-azure-build
+[NX Daemon Server] - 2023-11-01T17:30:40.769Z - [WATCHER]: 19 file(s) created or restored, 20 file(s) modified, 19 file(s) deleted
+NX As of Nx 13, project configuration should be moved from nx.json to workspace.json/project.json. Please run "nx format" to fix this.
+[NX Daemon Server] - 2023-11-01T17:30:40.881Z - [REQUEST]: Updated file-hasher based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2023-11-01T17:30:40.883Z - Error detected when recomputing project file map: Cannot read properties of undefined (reading 'endsWith')
+[NX Daemon Server] - 2023-11-01T17:30:44.587Z - [WATCHER]: Unsubscribed from changes within: /Users/isaac/Documents/code/nx-azure-build
+[NX Daemon Server] - 2023-11-01T17:30:44.587Z - Server stopped because: "Lock file changed"
+
+
+
+More information: /Users/isaac/Documents/code/nx-azure-build/.nx/cache/d/daemon.log

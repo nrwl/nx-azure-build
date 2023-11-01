@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
@@ -6,5 +7,5 @@ module.exports = {
   coverageDirectory: '../../coverage/apps/react-app',
   globals: { 'ts-jest': { tsConfig: '<rootDir>/tsconfig.spec.json' } },
   displayName: 'react-app',
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };

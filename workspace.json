@@ -8,7 +8,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/web:webpack",
+          "builder": "@nrwl/webpack:webpack",
           "options": {
             "outputPath": "dist/apps/react-app",
             "index": "apps/react-app/src/index.html",
@@ -58,7 +58,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@nrwl/web:dev-server",
+          "builder": "@nrwl/webpack:dev-server",
           "options": {
             "buildTarget": "react-app:build"
           },
@@ -92,7 +92,7 @@
             "jestConfig": "apps/react-app/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/apps/react-app"]
+          "outputs": ["{workspaceRoot}/coverage/apps/react-app"]
         }
       }
     },
@@ -148,7 +148,7 @@
             "jestConfig": "libs/react/lib0/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib0"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib0"]
         }
       }
     },
@@ -178,7 +178,7 @@
             "jestConfig": "libs/react/lib1/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib1"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib1"]
         }
       }
     },
@@ -208,7 +208,7 @@
             "jestConfig": "libs/react/lib10/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib10"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib10"]
         }
       }
     },
@@ -238,7 +238,7 @@
             "jestConfig": "libs/react/lib11/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib11"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib11"]
         }
       }
     },
@@ -268,7 +268,7 @@
             "jestConfig": "libs/react/lib12/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib12"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib12"]
         }
       }
     },
@@ -298,7 +298,7 @@
             "jestConfig": "libs/react/lib13/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib13"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib13"]
         }
       }
     },
@@ -328,7 +328,7 @@
             "jestConfig": "libs/react/lib14/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib14"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib14"]
         }
       }
     },
@@ -358,7 +358,7 @@
             "jestConfig": "libs/react/lib2/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib2"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib2"]
         }
       }
     },
@@ -388,7 +388,7 @@
             "jestConfig": "libs/react/lib3/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib3"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib3"]
         }
       }
     },
@@ -418,7 +418,7 @@
             "jestConfig": "libs/react/lib4/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib4"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib4"]
         }
       }
     },
@@ -448,7 +448,7 @@
             "jestConfig": "libs/react/lib5/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib5"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib5"]
         }
       }
     },
@@ -478,7 +478,7 @@
             "jestConfig": "libs/react/lib6/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib6"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib6"]
         }
       }
     },
@@ -508,7 +508,7 @@
             "jestConfig": "libs/react/lib7/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib7"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib7"]
         }
       }
     },
@@ -538,7 +538,7 @@
             "jestConfig": "libs/react/lib8/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib8"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib8"]
         }
       }
     },
@@ -568,7 +568,7 @@
             "jestConfig": "libs/react/lib9/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/react/lib9"]
+          "outputs": ["{workspaceRoot}/coverage/libs/react/lib9"]
         }
       }
     },
@@ -597,9 +597,10 @@
             "jestConfig": "libs/shared-utils/jest.config.ts",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/shared-utils"]
+          "outputs": ["{workspaceRoot}/coverage/libs/shared-utils"]
         }
       }
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

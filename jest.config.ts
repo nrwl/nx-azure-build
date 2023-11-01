@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   projects: [
     '<rootDir>/apps/react-app',
     '<rootDir>/libs/shared-utils',
