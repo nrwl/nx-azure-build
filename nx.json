@@ -3,9 +3,9 @@
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": "*",
-    "tsconfig.json": "*",
     "tslint.json": "*",
-    "nx.json": "*"
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
   },
   "projects": {
     "react-app": {
@@ -14,58 +14,7 @@
     "react-app-e2e": {
       "tags": []
     },
-    "ng-app-e2e": {
-      "tags": []
-    },
-    "ng-app": {
-      "tags": []
-    },
     "shared-utils": {
-      "tags": []
-    },
-    "ng-lib0": {
-      "tags": []
-    },
-    "ng-lib1": {
-      "tags": []
-    },
-    "ng-lib2": {
-      "tags": []
-    },
-    "ng-lib3": {
-      "tags": []
-    },
-    "ng-lib4": {
-      "tags": []
-    },
-    "ng-lib5": {
-      "tags": []
-    },
-    "ng-lib6": {
-      "tags": []
-    },
-    "ng-lib7": {
-      "tags": []
-    },
-    "ng-lib8": {
-      "tags": []
-    },
-    "ng-lib9": {
-      "tags": []
-    },
-    "ng-lib10": {
-      "tags": []
-    },
-    "ng-lib11": {
-      "tags": []
-    },
-    "ng-lib12": {
-      "tags": []
-    },
-    "ng-lib13": {
-      "tags": []
-    },
-    "ng-lib14": {
       "tags": []
     },
     "react-lib0": {
@@ -113,5 +62,21 @@
     "react-lib14": {
       "tags": []
     }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
   }
 }
