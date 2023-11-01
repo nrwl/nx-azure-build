@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true,
+        "allowTaggedTemplates": true
+      }
+    ]
+  },
+  "extends": ["plugin:@nrwl/nx/react", "../../.eslintrc"],
+  "ignorePatterns": ["!**/*"]
+}
