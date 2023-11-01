@@ -19,7 +19,7 @@
         ],
         "styles": ["apps/react-app/src/styles.css"],
         "scripts": [],
-        "webpackConfig": "@nx/react/plugins/babel",
+        "webpackConfig": "apps/react-app/webpack.config.js",
         "buildLibsFromSource": true
       },
       "configurations": {
