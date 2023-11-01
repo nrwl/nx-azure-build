@@ -152,5 +152,6 @@
       "cache": true
     }
   },
-  "parallel": 1
+  "parallel": 1,
+  "nxCloudAccessToken": "MTIzNDc3NTktY2IzNi00OWI3LTk3NzItMzI2YmZiNTJkMzc1fHJlYWQtd3JpdGU="
 }
